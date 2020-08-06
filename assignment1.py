@@ -14,16 +14,26 @@ def get_data():
     for line in input_file:
         line = line.strip()
         parts = line.split(",")
+        if parts[3] == "n":
+            parts.append("*")
+        else:
+            parts.append("")
         data.append(parts)
     input_file.close()
     return data
 
+def display_data(data):
+    index = 0
+    for details in data:
+        index += 1
+        print("{5:1}{0}. {1:10} in {2:15} priority {3:>3}".format(index, *details))
 
 def main():
     print("Travel Tracker 1.0 - by Alexander Lynne")
     data = get_data()
-    print(data) #TODO DELETE AFTER TESTING
     print("{0} places loaded from {1}".format(len(data), FILENAME))
+    print(data)  # TODO DELETE AFTER TESTING
+    display_data(data) #TODO MOVE TO MENU "L"
 
 
     """
