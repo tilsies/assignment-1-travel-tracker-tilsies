@@ -6,21 +6,27 @@ GitHub URL:
 """
 
 MENU = ("Menu: \nL - List places \nA - Add new place \nQ - Quit")
-IN_FILE = open("places.csv", "r")
+FILENAME = "places.csv"
 
-def count_places(file):
-    num_places = 0
-    for row in file:
-        num_places += 1
-    return num_places
-
+def get_data():
+    input_file = open(FILENAME)
+    data = []
+    for line in input_file:
+        line = line.strip()
+        parts = line.split(",")
+        data.append(parts)
+    input_file.close()
+    return data
 
 
 def main():
     print("Travel Tracker 1.0 - by Alexander Lynne")
-    initial_num_places = count_places(IN_FILE)
-    print("{0} places loaded from places.csv".format(initial_num_places))
+    data = get_data()
+    print(data) #TODO DELETE AFTER TESTING
+    print("{0} places loaded from {1}".format(len(data), FILENAME))
 
+
+    """
     print(MENU)
 
     menu_choice = input(">>> ").upper()
@@ -30,6 +36,9 @@ def main():
 
     while menu_choice in ["L", "A", "Q"]:
         if menu_choice == "L":
+            continue
+            
+    """
 
 
 
