@@ -35,16 +35,16 @@ def count_unvisited(data):
 def add_entry():
     new_location = []
 
-    city_name = input("City name: ".capitalize())
+    city_name = input("City name: ").capitalize()
     while len(city_name) <= 0:
         print("Input can not be blank")
-        city_name = input("City name: ".capitalize())
+        city_name = input("City name: ").capitalize()
     new_location.append(city_name)
 
-    country_name = input("Country: ".capitalize())
+    country_name = input("Country: ").capitalize()
     while len(country_name) <= 0:
         print("Input can not be blank")
-        country_name = input("Country: ".capitalize())
+        country_name = input("Country: ").capitalize()
     new_location.append(country_name)
 
     priority = input("Priority: ")
