@@ -6,6 +6,7 @@ GitHub URL:
 """
 
 MENU = ("Menu: \nL - List places \nA - Add new place \nQ - Quit")
+IN_FILE = open("places.csv", "r")
 
 def count_places(file):
     num_places = 0
@@ -17,8 +18,7 @@ def count_places(file):
 
 def main():
     print("Travel Tracker 1.0 - by Alexander Lynne")
-    in_file = open("places.csv", "r")
-    initial_num_places = count_places(in_file)
+    initial_num_places = count_places(IN_FILE)
     print("{0} places loaded from places.csv".format(initial_num_places))
 
     print(MENU)
@@ -27,6 +27,10 @@ def main():
     while menu_choice not in ["L", "A", "Q"]:
         print("Invalid Menu Choice")
         menu_choice = input(">>> ").upper()
+
+    while menu_choice in ["L", "A", "Q"]:
+        if menu_choice == "L":
+
 
 
 if __name__ == '__main__':
