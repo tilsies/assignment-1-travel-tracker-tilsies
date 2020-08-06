@@ -66,6 +66,31 @@ def add_entry():
 
     return new_location
 
+def mark_visited(data):  #TODO FIX THIS IDK
+    index = 0
+    for sub_list in data:
+        index += 1
+
+    mark_visited = int(input("Enter the number of a place to mark as visited \n>>>"))
+    """while not mark_visited.isnumeric():
+        print("Invalid place number")
+        mark_visited = input("Enter the number of a place to mark as visited \n>>>")"""
+
+    while mark_visited not in range[1,index+1]:
+        print("Invalid place number")
+        mark_visited = int(input("Enter the number of a place to mark as visited \n>>>"))
+
+    if data[mark_visited][3] == "v":
+        print("That place is already visited")
+
+    else:
+        data[mark_visited][3] == "v"
+        data[mark_visited][4] == ""
+
+    print("{0} in {1} visited!".format(data[mark_visited][1], data[mark_visited][2]))
+    return data
+
+
 
 
 def main():
@@ -93,7 +118,11 @@ def main():
 
 
         else:
-            continue
+            display_data(data)
+            num_unvisited = count_unvisited(data)
+            print("{0} places. You still want to visit {1} places.".format(len(data), num_unvisited))
+            mark_visited(data)
+
 
         print(MENU)
         menu_choice = input(">>> ").upper()
