@@ -53,10 +53,10 @@ def add_entry():
         priority = input("Priority: ")
     new_location.append(priority)
 
-    visited = input("Have you visited this country? (v/n)".lower())
+    visited = input("Have you visited this country? (v/n): ".lower())
     while visited not in ["v", "n"]:
         print("Inavlid input; enter a valid option")
-        visited = input("Have you visited this country? (v/n)".lower())
+        visited = input("Have you visited this country? (v/n): ".lower())
     new_location.append(visited)
 
     if new_location[3] == "n":
@@ -146,17 +146,18 @@ def main():
             menu_choice = input(">>> ").upper()
 
     if menu_choice == "Q":
-        print(data)
         remove_last(data)
-        print(data)
-        input_file.write(data)
-        input_fileFILENAME.close
-        print("placeholder") #TODO complete
+        output_file = open(FILENAME, "w")
+        for sublist in data:
+            for element in sublist:
+                if element in sublist == sublist[-1]:     #TODO FIX LAST ELEMENT ADDING ","
+                    output_file.write(element)
+                else:
+                    output_file.write(element)
+                    output_file.write(",")
+            output_file.write("\n")
 
-
-
-            
-
+        print("{0} places saved to places.csv \nHave a nice day :D".format(len(data)))
 
 
 
