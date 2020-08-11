@@ -66,31 +66,27 @@ def add_entry():
 
     return new_location
 
-def mark_visited(data):  #TODO FIX THIS IDK
-    index = 0
-    for sub_list in data:
-        index += 1
+def mark_visited(data):  #TODO FIX INDEX ERROR
 
-    mark_visited = int(input("Enter the number of a place to mark as visited \n>>>"))
-    """while not mark_visited.isnumeric():
-        print("Invalid place number")
-        mark_visited = input("Enter the number of a place to mark as visited \n>>>")"""
 
-    while mark_visited not in range[1,index+1]:
-        print("Invalid place number")
-        mark_visited = int(input("Enter the number of a place to mark as visited \n>>>"))
+    while True:
+        try:
+            mark_visited = int(input("Enter the number of a place to mark as visited \n>>> ")) - 1
+            break
+        except ValueError:
+            print("Invalid input, enter a valid number")
+        except IndexError:
+            print("Invalid place number")
 
     if data[mark_visited][3] == "v":
-        print("That place is already visited")
+        print("That place is already visited \n")
 
     else:
-        data[mark_visited][3] == "v"
-        data[mark_visited][4] == ""
+        data[mark_visited][3] = "v"
+        data[mark_visited][4] = ""
+        print("{0} in {1} visited! \n".format(data[mark_visited][0], data[mark_visited][1]))
 
-    print("{0} in {1} visited!".format(data[mark_visited][1], data[mark_visited][2]))
     return data
-
-
 
 
 def main():
@@ -118,14 +114,25 @@ def main():
 
 
         else:
-            display_data(data)
-            num_unvisited = count_unvisited(data)
-            print("{0} places. You still want to visit {1} places.".format(len(data), num_unvisited))
-            mark_visited(data)
+            elem_to_find = "*"
+            all_visited = any(elem_to_find in sublist for sublist in data)
+
+            if all_visited == False:
+                print("\nNo unvisited places \n")
+
+            else:
+                display_data(data)
+                num_unvisited = count_unvisited(data)
+                print("{0} places. You still want to visit {1} places.".format(len(data), num_unvisited))
+                mark_visited(data)
+
 
 
         print(MENU)
         menu_choice = input(">>> ").upper()
+        while menu_choice not in ["L", "A", "M", "Q"]:
+            print("Invalid Menu Choice")
+            menu_choice = input(">>> ").upper()
 
     if menu_choice == "Q":
         print("placeholder") #TODO complete
