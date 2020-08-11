@@ -8,8 +8,8 @@ GitHub URL:
 MENU = ("Menu: \nL - List places \nA - Add new place \nM - Mark a place as visited \nQ - Quit")
 FILENAME = "places.csv"
 
-def get_data():
-    input_file = open(FILENAME)
+def get_data(input_file):
+
     data = []
     for line in input_file:
         line = line.strip()
@@ -66,7 +66,7 @@ def add_entry():
 
     return new_location
 
-def mark_visited(data):  #TODO FIX INDEX ERROR
+def mark_visited(data):
 
 
     while True:
@@ -75,8 +75,11 @@ def mark_visited(data):  #TODO FIX INDEX ERROR
             break
         except ValueError:
             print("Invalid input, enter a valid number")
-        except IndexError:
-            print("Invalid place number")
+
+    while mark_visited > len(data) - 1:
+        print("Invalid place number")
+        mark_visited = int(input("Enter the number of a place to mark as visited \n>>> ")) - 1
+
 
     if data[mark_visited][3] == "v":
         print("That place is already visited \n")
@@ -88,10 +91,18 @@ def mark_visited(data):  #TODO FIX INDEX ERROR
 
     return data
 
+def remove_last(data):
+
+    for sublist in data:
+        del sublist[-1]
+
+    return data
+
 
 def main():
     print("Travel Tracker 1.0 - by Alexander Lynne")
-    data = get_data()
+    input_file = open(FILENAME)
+    data = get_data(input_file)
     print("{0} places loaded from {1}".format(len(data), FILENAME))
 
     print(MENU)
@@ -135,7 +146,14 @@ def main():
             menu_choice = input(">>> ").upper()
 
     if menu_choice == "Q":
+        print(data)
+        remove_last(data)
+        print(data)
+        input_file.write(data)
+        input_fileFILENAME.close
         print("placeholder") #TODO complete
+
+
 
             
 
