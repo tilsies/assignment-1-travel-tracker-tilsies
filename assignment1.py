@@ -1,7 +1,8 @@
 """
+
 Name: Alexander James Hing Chong Lynne
 Date started: 08/06/2020
-GitHub URL:
+GitHub URL: https://github.com/tilsies/assignment-1-travel-tracker-tilsies
 
 """
 from operator import itemgetter
@@ -11,6 +12,13 @@ FILENAME = "places.csv"
 
 
 def get_data(input_file):
+    """
+    Creates initial list of list
+    Strips lines into seperate list
+    Splits elements by "," in csv
+    Appends a 5th element of "*" or " " based on 4th element of list.
+    """
+
     data = []
     for line in input_file:
         line = line.strip()
@@ -25,6 +33,10 @@ def get_data(input_file):
 
 
 def display_data(data):
+    """
+    Prints data in readable format
+    """
+
     index = 0
     for details in data:
         index += 1
@@ -32,14 +44,23 @@ def display_data(data):
 
 
 def count_unvisited(data):
+    """
+    Takes input parameter (data) and returns number of unvisited places
+    """
     count = sum(n.count("n") for n in data)
     return count
 
 def sort_data(data):
+    """
+    Takes input parameter (data) and returns data sorted Unvisited/Visited followed by Priority
+    """
     data.sort(key=itemgetter(3,2))
     return data
 
 def add_entry():
+    """
+    Takes inputs for adding new entry and returns list.
+    """
     new_location = []
 
     city_name = input("City name: ").capitalize()
@@ -75,6 +96,11 @@ def add_entry():
 
 
 def mark_visited(data):
+    """
+    Takes input parameter (data)
+    Takes user input to select sublist in data
+    Updates entry to visited if country selected is currently unvisited
+    """
     while True:
         try:
             mark_visited = int(input("Enter the number of a place to mark as visited \n>>> ")) - 1
@@ -98,6 +124,9 @@ def mark_visited(data):
 
 
 def remove_last(data):
+    """
+    Removes 5th element of "*" / " " from sublist in data
+    """
     for sublist in data:
         del sublist[-1]
 
@@ -114,17 +143,20 @@ def main():
 
     menu_choice = input(">>> ").upper()
     while menu_choice not in ["L", "A", "M", "Q"]:
+        # Error checking for inputs
         print("Invalid Menu Choice")
         menu_choice = input(">>> ").upper()
 
     while menu_choice in ["L", "A", "M"]:
         if menu_choice == "L":
+            # Sorts data and prints in readable format. Also prints count of unvisited locations
             sort_data(data)
             display_data(data)
             num_unvisited = count_unvisited(data)
             print("{0} places. You still want to visit {1} places.".format(len(data), num_unvisited))
 
         elif menu_choice == "A":
+            # Creates new list using add_entry() and appends list to data. Sorts appended list and prints in format
             new_entry = add_entry()
             data.append(new_entry)
             sort_data(data)
@@ -132,6 +164,7 @@ def main():
 
 
         else:
+            # Checks if all places are visited. If true prints all places are visited, if false allows user to mark place as visited
             elem_to_find = "*"
             all_visited = any(elem_to_find in sublist for sublist in data)
 
@@ -152,6 +185,7 @@ def main():
             menu_choice = input(">>> ").upper()
 
     if menu_choice == "Q":
+        # Removes added element of "*"/" " from sublist and saves files in appropriate format
         remove_last(data)
         output_file = open(FILENAME, "w")
 
