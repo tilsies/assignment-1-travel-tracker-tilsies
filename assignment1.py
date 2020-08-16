@@ -36,8 +36,7 @@ def count_unvisited(data):
     return count
 
 def sort_data(data):
-    data.sort(key=itemgetter(2),reverse=True)
-    data.sort(key=itemgetter(3))
+    data.sort(key=itemgetter(3,2))
     return data
 
 def add_entry():
@@ -156,26 +155,19 @@ def main():
         remove_last(data)
         output_file = open(FILENAME, "w")
 
-        # TODO FIX LAST ELEMENT ADDING "," USE LEN - 1
+        save_index = 0
         for sublist in data:
+            save_index = 0
             for element in sublist:
-                if element in sublist < len(sublist):
+                save_index += 1
+
+                if save_index < len(sublist):
                     output_file.write(element)
                     output_file.write(",")
                 else:
                     output_file.write(element)
             output_file.write("\n")
 
-        """for index in range(len(sublist)):"""
-
-        """for sublist in data:
-            for element in sublist:
-                if element in sublist == sublist[-1]:  
-                    output_file.write(element)
-                else:
-                    output_file.write(element)
-                    output_file.write(",")
-            output_file.write("\n") """
 
         print("{0} places saved to places.csv \nHave a nice day :D".format(len(data)))
 
